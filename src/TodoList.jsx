@@ -1,3 +1,5 @@
+// Component that is responsible for rendering the todo list
+
 import React from "react";
 import TodoListItem from "./TodoListItem.jsx"
 
@@ -13,14 +15,19 @@ function TodoList() {
   return (
     <ul>
       {todoList.map((item) => (
-      <TodoListItem key={item.id} item={item}/> 
+        <TodoListItem key={item.id} item={item} />
       ))}
     </ul>
 
   )
-
-
 }
 
 export default TodoList;
 
+/*Отвечает за отображение списка всех задач.
+Данные:
+Локальный массив todoList содержит несколько задач с id и title.
+Рендеринг:
+Проходит по массиву задач с помощью .map() и для каждой задачи рендерит компонент TodoListItem, передавая данные задачи через проп item.
+У каждой задачи устанавливается уникальный key (идентификатор).
+*/
