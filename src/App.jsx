@@ -1,40 +1,44 @@
 // This is the main component
 
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
-import * as React from 'react';
-import TodoList from './todoList.jsx'
-import AddTodoForm from './AddTodoForm.jsx'
-
+import { useState } from "react";
+import "./App.css";
+import AddTodoForm from "./AddTodoForm.jsx";
+import TodoList from "./TodoList.jsx";
 
 function App() {
-  const [newTodo, setNewTodo] = useState('');   
+  const [todoList, setTodoList] = useState([]); // Состояние для списка заданий);
+
+
+  function addTodo(newTodo) {
+    try {
+      setTodoList([...todoList, newTodo]);
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
+  }; // Добавляем задачу в список
 
   return (
     <div>
+      {/* Подключаем изображение */}
+      <img src="/images/checklist.png" alt="Checklist" style={{ width: "100px", marginBottom: "20px" }} />
       <h1>Todo List</h1>
-      < AddTodoForm onAddTodo={setNewTodo} /> 
-      < TodoList /> 
+      <AddTodoForm onAddTodo={addTodo} />
+      <TodoList todos={todoList} /> {/* Передаем список задач */}
     </div>
   );
 }
 
 export default App;
 
-/* *Импорты:
-Импортируются useState из React, компонент AddTodoForm и TodoList, а также CSS стили и логотип React.
-Состояние:
-Используется хук useState для управления состоянием newTodo (текущий текст задачи).
-Рендеринг:
-Отображает заголовок "Todo List".
-Подключает компонент AddTodoForm, передавая функцию setNewTodo через проп onAddTodo.
-Показывает текст новой задачи под формой.
-Отображает список задач через компонент TodoList.
-*/
+/* Компонент App
+Ответственность: основной компонент приложения.
 
-/*Пример работы всего приложения:
-На экране отображается список задач, указанных в массиве todoList.
-Пользователь вводит текст в поле "Title" и нажимает "Add".
-AddTodoForm вызывает handleAddTodo, передает текст задачи в App, где обновляется состояние newTodo.
-Новый текст задачи отображается в <p>New Todo: {newTodo}</p>, но сам список задач (todoList) не обновляется, так как он статически определен. */
+Что он делает:
+
+Определяет состояние newTodo с помощью useState.
+Передает функцию изменения состояния (setNewTodo) в компонент AddTodoForm как onAddTodo.
+Отображает заголовок "Todo List", компонент AddTodoForm и компонент TodoList.
+Как это работает:
+
+Когда AddTodoForm вызывает setNewTodo, состояние newTodo обновляется, 
+но здесь это состояние пока не используется для добавления новой задачи в список.*/

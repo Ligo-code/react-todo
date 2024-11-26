@@ -1,12 +1,16 @@
 // Component that is responsible for a single todo item
 
-function TodoListItem(props) {
+function TodoListItem({todo}) {
     return (<li>
-        {(props.item.title).trim()} </li>); 
+        {todo.title.trim()} </li>); 
 }
 export default TodoListItem;
 
-/*Отвечает за отображение отдельной задачи.
-Рендеринг:
-Получает задачу через проп item.
-Отображает название задачи, удаляя лишние пробелы методом .trim().*/
+/*Ответственность: отображение одной задачи.
+
+Что он делает:
+
+Принимает проп item и выводит его свойство title внутри элемента списка <li>.
+Как это работает:
+
+Каждый вызов TodoListItem отображает текст одной задачи, переданной в props.item.*/
