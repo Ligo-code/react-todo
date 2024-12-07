@@ -1,5 +1,5 @@
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
@@ -16,7 +16,7 @@ body {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  
+
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -67,7 +67,7 @@ li {
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #007BFF; /* Синий цвет */
+  color: #007bff; /* Синий цвет */
   text-align: center;
 }
 
@@ -88,13 +88,13 @@ label {
 input[type="text"] {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #007BFF;
+  border: 1px solid #007bff;
   border-radius: 4px;
 }
 
 button {
   padding: 10px 15px;
-  background-color: #007BFF; /* Синий цвет */
+  background-color: #007bff; /* Синий цвет */
   color: #fff;
   font-size: 16px;
   border: none;
@@ -108,6 +108,7 @@ button:hover {
 }
 
 /* Список задач */
+/* Основные стили для списка задач */
 ul {
   list-style: none;
   padding: 0;
@@ -127,4 +128,79 @@ li {
 
 li:hover {
   background-color: #e8e8e8;
+}
+
+/* Контейнер для кнопок */
+.button-container {
+  display: flex;
+  gap: 5px; /* Расстояние между кнопками */
+}
+
+/* Кнопка "Edit" */
+.edit-button {
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #4caf50; /* Зеленый цвет */
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #45a049; /* Темнее при наведении */
+}
+
+/* Кнопка "Delete" */
+.delete-button {
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #f44336; /* Красный цвет */
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Темнее при наведении */
+}
+
+/* Поле ввода для редактирования */
+.todo-input {
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Кнопки "Save" и "Cancel" */
+.save-button,
+.cancel-button {
+  font-size: 14px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.save-button {
+  background-color: #2196f3; /* Синий цвет */
+}
+
+.save-button:hover {
+  background-color: #1976d2; /* Темнее при наведении */
+}
+
+.cancel-button {
+  background-color: #777; /* Серый цвет */
+}
+
+.cancel-button:hover {
+  background-color: #555; /* Темнее при наведении */
 }
