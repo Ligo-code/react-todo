@@ -1,19 +1,21 @@
 // Component that is responsible for rendering the todo list
 
 import React from "react";
-import TodoListItem from "./TodoListItem.jsx"
+import TodoListItem from "./TodoListItem.jsx";
 
-function TodoList({ todos }) { // Получаем список задач как пропс
+function TodoList({ todos, onRemoveTodo, onEditTodo }) {
   return (
     <ul>
       {todos.map((todo) => (
-        <TodoListItem key={todo.id} todo={todo} /> // Передаем "todo" как пропс
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          onRemoveTodo={onRemoveTodo}
+          onEditTodo={onEditTodo}
+        />
       ))}
     </ul>
   );
 }
 
 export default TodoList;
-
-/*
-*/

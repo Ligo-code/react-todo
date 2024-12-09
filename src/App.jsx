@@ -1,44 +1,66 @@
-// This is the main component
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import AddTodoForm from "./AddTodoForm.jsx";
 import TodoList from "./TodoList.jsx";
 
-function App() {
-  const [todoList, setTodoList] = useState([]); // Состояние для списка заданий);
+function useSemiPersistentState() {
+  const [todoList, setTodoList] = useState(() => {
+    const savedTodoList = localStorage.getItem("savedTodoList");
+    try {
+      return savedTodoList ? JSON.parse(savedTodoList) : [];
+    } catch (error) {
+      console.error("Error parsing savedTodoList:", error);
+      return [];
+    }
+  });
 
+  useEffect(() => {
+    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+  }, [todoList]);
+
+  return [todoList, setTodoList];
+}
+
+function App() {
+  const [todoList, setTodoList] = useSemiPersistentState();
 
   function addTodo(newTodo) {
-    try {
-      setTodoList([...todoList, newTodo]);
-    } catch (error) {
-      console.error("Error adding todo:", error);
+    if (todoList.some(todo => todo.title === newTodo.title)) {
+      alert("Task already exists!");
+      return;
     }
-  }; // Добавляем задачу в список
+
+    setTodoList([...todoList, newTodo]);
+  }
+
+  function removeTodo(todoId) {
+    const updatedTodoList = todoList.filter(todo => todo.id !== todoId);
+    setTodoList(updatedTodoList); // Обновляем список задач
+  }
+
+  function editTodo(todoId, newTitle) {
+    const updatedTodoList = todoList.map(todo =>
+      todo.id === todoId ? { ...todo, title: newTitle } : todo
+    );
+    setTodoList(updatedTodoList); // Обновляем список задач
+  }
 
   return (
-    <div>
-      {/* Подключаем изображение */}
-      <img src="/images/checklist.png" alt="Checklist" style={{ width: "100px", marginBottom: "20px" }} />
+    <>
+      <img
+        src="/images/checklist.png"
+        alt="Checklist"
+        style={{ width: "100px", marginBottom: "20px" }}
+      />
       <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
-      <TodoList todos={todoList} /> {/* Передаем список задач */}
-    </div>
+      <TodoList
+        todos={todoList}
+        onRemoveTodo={removeTodo}
+        onEditTodo={editTodo}
+      />
+    </>
   );
 }
 
 export default App;
-
-/* Компонент App
-Ответственность: основной компонент приложения.
-
-Что он делает:
-
-Определяет состояние newTodo с помощью useState.
-Передает функцию изменения состояния (setNewTodo) в компонент AddTodoForm как onAddTodo.
-Отображает заголовок "Todo List", компонент AddTodoForm и компонент TodoList.
-Как это работает:
-
-Когда AddTodoForm вызывает setNewTodo, состояние newTodo обновляется, 
-но здесь это состояние пока не используется для добавления новой задачи в список.*/
