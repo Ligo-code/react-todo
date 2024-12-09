@@ -43,7 +43,7 @@ function App() {
       todo.id === todoId ? { ...todo, title: newTitle } : todo
     );
     setTodoList(updatedTodoList); // Обновляем список задач
-  }
+  } 
 
   return (
     <>

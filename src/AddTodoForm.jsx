@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import InputWithLabel from "./InputWithLabel";
 
 function AddTodoForm({ onAddTodo }) {
   const [todoTitle, setTodoTitle] = useState("");
@@ -18,18 +19,18 @@ function AddTodoForm({ onAddTodo }) {
   }
   return (
     <form onSubmit={handleAddTodo}>
-      <label htmlFor="todoTitle">Title</label>
-      <input
+      <InputWithLabel
         id="todoTitle"
         type="text"
         placeholder="Title"
         name="todoTitle"
         value={todoTitle}
-        onChange={handleTitleChange}
-      />
+        onInputChange={handleTitleChange}
+        >
+          Title
+        </InputWithLabel>     
       <button type="submit">Add</button>
     </form>
   );
 }
 export default AddTodoForm;
-
