@@ -3,47 +3,58 @@ import "./App.css";
 import AddTodoForm from "./AddTodoForm.jsx";
 import TodoList from "./TodoList.jsx";
 
-function useSemiPersistentState() {
-  const [todoList, setTodoList] = useState(() => {
-    const savedTodoList = localStorage.getItem("savedTodoList");
-    try {
-      return savedTodoList ? JSON.parse(savedTodoList) : [];
-    } catch (error) {
-      console.error("Error parsing savedTodoList:", error);
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-  }, [todoList]);
-
-  return [todoList, setTodoList];
-}
-
 function App() {
-  const [todoList, setTodoList] = useSemiPersistentState();
+  const [todoList, setTodoList] = useState([]); // Начальное состояние пустое
+  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
 
+  // useEffect для асинхронной загрузки данных
+  useEffect(() => {
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: {
+            todoList: [
+              { id: "1", title: "Learn React" },
+              { id: "2", title: "Learn Async/Await" }
+            ]
+          }
+        });
+      }, 2000);
+    }).then((result) => {
+      setTodoList(result.data.todoList); // Устанавливаем задачи
+      setIsLoading(false); // Завершаем загрузку
+    });
+  }, []);
+
+  // useEffect для сохранения данных в localStorage
+  useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
+  }, [todoList, isLoading]);
+
+  // Добавление новой задачи
   function addTodo(newTodo) {
-    if (todoList.some(todo => todo.title === newTodo.title)) {
+    if (todoList.some((todo) => todo.title === newTodo.title)) {
       alert("Task already exists!");
       return;
     }
-
     setTodoList([...todoList, newTodo]);
   }
 
+  // Удаление задачи
   function removeTodo(todoId) {
-    const updatedTodoList = todoList.filter(todo => todo.id !== todoId);
-    setTodoList(updatedTodoList); // Обновляем список задач
+    const updatedTodoList = todoList.filter((todo) => todo.id !== todoId);
+    setTodoList(updatedTodoList);
   }
 
+  // Редактирование задачи
   function editTodo(todoId, newTitle) {
-    const updatedTodoList = todoList.map(todo =>
+    const updatedTodoList = todoList.map((todo) =>
       todo.id === todoId ? { ...todo, title: newTitle } : todo
     );
-    setTodoList(updatedTodoList); // Обновляем список задач
-  } 
+    setTodoList(updatedTodoList);
+  }
 
   return (
     <>
@@ -53,12 +64,18 @@ function App() {
         style={{ width: "100px", marginBottom: "20px" }}
       />
       <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      <TodoList
-        todos={todoList}
-        onRemoveTodo={removeTodo}
-        onEditTodo={editTodo}
-      />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <AddTodoForm onAddTodo={addTodo} />
+          <TodoList
+            todos={todoList}
+            onRemoveTodo={removeTodo}
+            onEditTodo={editTodo}
+          />
+        </>
+      )}
     </>
   );
 }
