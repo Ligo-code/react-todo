@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 import AddTodoForm from "./AddTodoForm.jsx";
@@ -49,7 +50,7 @@ const postTodo = async (todoTitle) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(airtableData),
-  };
+  }; 
 
   const url = `https://api.airtable.com/v0/${
     import.meta.env.VITE_AIRTABLE_BASE_ID
@@ -115,28 +116,38 @@ function App() {
   };
 
   return (
-    <>
-      <img
-        src="/images/checklist.png"
-        alt="Checklist"
-        style={{ width: "100px", marginBottom: "20px" }}
-      />
-      <h1>Todo List</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p> // Показываем сообщение об ошибке, если она произошла
-      ) : (
-        <>
-          <AddTodoForm onAddTodo={addTodo} />
-          <TodoList
-            todos={todoList} // Передаем список задач в компонент TodoList
-            onRemoveTodo={removeTodo}
-            onEditTodo={editTodo}
-          />
-        </>
-      )}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route        
+          path="/"
+          element={
+            <>
+              <img
+                src="/images/checklist.png"
+                alt="Checklist"
+                style={{ width: "100px", marginBottom: "20px" }}
+              />
+              <h1>Todo List</h1>
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p>{error}</p>
+              ) : (
+                <>
+                  <AddTodoForm onAddTodo={addTodo} />
+                  <TodoList
+                    todos={todoList}
+                    onRemoveTodo={removeTodo}
+                    onEditTodo={editTodo}
+                  />
+                </>
+              )}
+            </>
+          }
+        />
+        <Route path="/new" element={<h1>New Todo List</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
