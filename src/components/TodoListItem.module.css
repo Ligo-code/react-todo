@@ -1,0 +1,89 @@
+.ListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: var(--task-bg);
+  color: var(--task-text);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ListItem.removing {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ListItem:hover {
+  background-color: var(--task-hover-bg);
+}
+
+.EditContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.TaskContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ButtonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.Input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--task-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+.SaveButton,
+.CancelButton,
+.EditButton,
+.DeleteButton {
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  width: 70px;
+}
+
+.SaveButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.CancelButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.EditButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.DeleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.SaveButton:hover,
+.CancelButton:hover,
+.EditButton:hover,
+.DeleteButton:hover {
+  opacity: 0.9;
+}
