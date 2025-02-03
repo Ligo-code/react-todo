@@ -1,206 +1,234 @@
+:root {
+  --background-color: #f7f7fc;
+  --text-color: #1a1a2e;
+  --input-bg: #ffffff;
+  --input-text: #333;
+  --button-bg: #007bff;
+  --button-hover-bg: #0056b3;
+  --task-bg: #ffffff;
+  --task-text: #333;
+  --task-border: #e0e0e0;
+  --task-hover-bg: #f0f0f0;
+  --theme-toggle-bg: #007bff;
+  --theme-toggle-color: #ffffff;
+}
+
+.dark-theme {
+  --background-color: #072c5c; /* Темный цвет фона */
+  --text-color: #e0e0e0;
+  --input-bg: #2a2a40;
+  --input-text: #e0e0e0;
+  --button-bg: #5454bf;
+  --button-hover-bg: #383875;
+  --task-bg: #2a2a40;
+  --task-text: #e0e0e0;
+  --task-border: #444;
+  --task-hover-bg: #33334d;
+  --theme-toggle-bg: #0056b3;
+  --theme-toggle-color: #ffffff;
+}
+
 body {
-  font-family: "Arial", sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  display: flex; /* Для центрирования */
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Высота окна браузера */
-}
-
-/* Карточка */
-#root {
-  max-width: 400px; /* Уменьшили ширину карточки */
-  width: 100%;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-li {
-  text-align: left;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Заголовок */
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #007bff; /* Синий цвет */
-  text-align: center;
-}
-
-/* Форма */
-form {
   display: flex;
-  flex-direction: column; /* Выровняли элементы вертикально */
-  gap: 10px; /* Добавили расстояние между элементами */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+  background-image: url('/pattern.svg'); /* Паттерн для светлой темы */
+  background-size: 64px 64px; /* Размер паттерна */
+  background-repeat: repeat; /* Повторение паттерна */
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-label {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 5px;
-  text-align: left; /* Выравнивание по левому краю */
+.dark-theme body {
+  background-color: var(--background-color);
+  background-image: url('/patternDark.svg'); /* Паттерн для темной темы */
+  background-size: 64px 64px;
+  background-repeat: repeat;
 }
 
-input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #007bff;
-  border-radius: 4px;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007bff;
 }
 
 button {
-  padding: 10px 15px;
-  background-color: #007bff; /* Синий цвет */
-  color: #fff;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: var(--button-bg);
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3; /* Более тёмный синий при наведении */
+  background-color: var(--button-hover-bg);
 }
 
-/* Список задач */
-/* Основные стили для списка задач */
+.app {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-toggle button {
+  background-color: var(--theme-toggle-bg);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: var(--theme-toggle-color);
+}
+
+.theme-toggle button:hover {
+  opacity: 0.9;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.app-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 540px;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--task-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="text"]:hover {
+  background-color: var(--task-hover-bg);
+}
+
+input[type="text"]:focus {
+  border-color: var(--button-bg);
+  outline: none;
+}
+
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%;
+  max-width: 540px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 li {
-  background-color: #f4f4f4;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 4px;
+  background-color: var(--task-bg);
+  color: var(--task-text);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 li:hover {
-  background-color: #e8e8e8;
+  background-color: var(--task-hover-bg);
 }
 
-/* Контейнер для кнопок */
 .button-container {
   display: flex;
-  gap: 5px; /* Расстояние между кнопками */
+  gap: 10px;
 }
 
-/* Кнопка "Edit" */
-.edit-button {
-  font-size: 14px;
-  padding: 5px 10px;
-  background-color: #4caf50; /* Зеленый цвет */
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.todo-card {
+  width: 90%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #a3c8f3, #055ebe); /* Градиент для светлой темы */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white; /* Белый текст для контраста */
 }
 
-.edit-button:hover {
-  background-color: #45a049; /* Темнее при наведении */
+.dark-theme .todo-card {
+  background: linear-gradient(135deg, #565b72, #00020c); /* Градиент для темной темы */
+  color: #e0e0e0; /* Светло-серый текст */
 }
 
-/* Кнопка "Delete" */
-.delete-button {
-  font-size: 14px;
-  padding: 5px 10px;
-  background-color: #f44336; /* Красный цвет */
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 600px) {
+  .app {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .todo-card {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .inputContainer {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .addButton {
+    width: 100%;
+  }
 }
 
-.delete-button:hover {
-  background-color: #d32f2f; /* Темнее при наведении */
-}
+/* Медиа-запросы для планшетов */
+@media (min-width: 601px) and (max-width: 900px) {
+  .app {
+    max-width: 90%;
+  }
 
-/* Поле ввода для редактирования */
-.todo-input {
-  flex-grow: 1;
-  padding: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-/* Кнопки "Save" и "Cancel" */
-.save-button,
-.cancel-button {
-  font-size: 14px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  color: #fff;
-  transition: background-color 0.3s ease;
-}
-
-.save-button {
-  background-color: #2196f3; /* Синий цвет */
-}
-
-.save-button:hover {
-  background-color: #1976d2; /* Темнее при наведении */
-}
-
-.cancel-button {
-  background-color: #777; /* Серый цвет */
-}
-
-.cancel-button:hover {
-  background-color: #555; /* Темнее при наведении */
+  .todo-card {
+    width: 80%;
+  }
 }
