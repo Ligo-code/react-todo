@@ -1,9 +1,13 @@
 import React from "react";
-import TodoListItem from "./TodoListItem.jsx";
-import styles from "./TodoList.module.css";
+import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
+import styles from "./TodoList.module.css";
 
-function TodoList({ todos, onRemoveTodo, onEditTodo }) {
+function TodoList({ todos, onRemoveTodo, onEditTodo, onToggleCompleted, currentUser, users }) {
+  if (!currentUser) {
+    return <p className={styles.error}>Error: No user found.</p>;
+  }
+
   return (
     <ul className={styles.todoList}>
       {todos.length === 0 ? (
@@ -13,8 +17,11 @@ function TodoList({ todos, onRemoveTodo, onEditTodo }) {
           <TodoListItem
             key={todo.id}
             todo={todo}
-            onRemoveTodo={onRemoveTodo}
-            onEditTodo={onEditTodo}
+            onRemoveTodo={currentUser.role === "parent" ? onRemoveTodo : null}
+            onEditTodo={currentUser.role === "parent" ? onEditTodo : null}
+            onToggleCompleted={onToggleCompleted} // ✅ Ребенок может отмечать выполнение
+            currentUser={currentUser}
+            users={users || []} // ✅ Передаем users с безопасной проверкой
           />
         ))
       )}
@@ -23,14 +30,19 @@ function TodoList({ todos, onRemoveTodo, onEditTodo }) {
 }
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onRemoveTodo: PropTypes.func.isRequired,
-  onEditTodo: PropTypes.func.isRequired,
+  todos: PropTypes.array.isRequired,
+  onRemoveTodo: PropTypes.func,
+  onEditTodo: PropTypes.func,
+  onToggleCompleted: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+  }).isRequired,
+  users: PropTypes.array, // ✅ Добавляем users в пропсы
+};
+
+TodoList.defaultProps = {
+  users: [], // ✅ Если users не загружены, передаем пустой массив
 };
 
 export default TodoList;
