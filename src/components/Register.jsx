@@ -50,16 +50,16 @@ function Register() {
   
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("❌ Error response from Airtable:", errorData);
+        console.error("Error response from Airtable:", errorData);
         throw new Error(errorData.error?.message || "Failed to register user.");
       }
   
       const data = await response.json();
-      console.log("✅ Registered user ID:", data.id);
+      console.log("Registered user ID:", data.id);
   
       navigate("/login");
     } catch (error) {
-      console.error("❌ Registration error:", error);
+      console.error("Registration error:", error);
       setError(error.message || "Failed to register user. Please try again.");
     }
   };

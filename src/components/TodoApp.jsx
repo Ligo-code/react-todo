@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 import styles from "./TodoApp.module.css";
+import { useNavigate } from "react-router-dom";
 
 function TodoApp({ currentUser }) {
   const [todoList, setTodoList] = useState([]);
@@ -10,6 +11,7 @@ function TodoApp({ currentUser }) {
   const [error, setError] = useState(null);
   const [sortType, setSortType] = useState("title");
   const [sortOrder, setSortOrder] = useState("asc");
+  const navigate = useNavigate();
 
   console.log("Current User:", currentUser);
 
@@ -17,11 +19,15 @@ function TodoApp({ currentUser }) {
     const loadUsers = async () => {
       try {
         const response = await fetch(
-          `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Users`,
+          `https://api.airtable.com/v0/${
+            import.meta.env.VITE_AIRTABLE_BASE_ID
+          }/Users`,
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+              Authorization: `Bearer ${
+                import.meta.env.VITE_AIRTABLE_API_TOKEN
+              }`,
             },
           }
         );
@@ -30,7 +36,7 @@ function TodoApp({ currentUser }) {
         const data = await response.json();
         setUsers(data.records || []);
       } catch (error) {
-        console.error("❌ Error loading users:", error);
+        console.error("Error loading users:", error);
         setError("Failed to load users.");
       }
     };
@@ -39,13 +45,17 @@ function TodoApp({ currentUser }) {
   }, []);
 
   useEffect(() => {
-    loadData();
+    if (currentUser) {
+      loadData();
+    }
   }, [currentUser]);
 
   const loadData = async () => {
     try {
       const response = await fetch(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks`,
+        `https://api.airtable.com/v0/${
+          import.meta.env.VITE_AIRTABLE_BASE_ID
+        }/Tasks`,
         {
           method: "GET",
           headers: {
@@ -67,7 +77,7 @@ function TodoApp({ currentUser }) {
       }));
       setTodoList(tasks);
     } catch (error) {
-      console.error("❌ Error loading tasks:", error);
+      console.error("Error loading tasks:", error);
       setError("Failed to load tasks.");
     } finally {
       setIsLoading(false);
@@ -76,10 +86,14 @@ function TodoApp({ currentUser }) {
 
   const addTodo = async (newTodo, assignedTo) => {
     try {
-      const assignedArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
+      const assignedArray = Array.isArray(assignedTo)
+        ? assignedTo
+        : [assignedTo];
 
       const response = await fetch(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks`,
+        `https://api.airtable.com/v0/${
+          import.meta.env.VITE_AIRTABLE_BASE_ID
+        }/Tasks`,
         {
           method: "POST",
           headers: {
@@ -98,14 +112,14 @@ function TodoApp({ currentUser }) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("❌ Error adding task:", errorData);
+        console.error("Error adding task:", errorData);
         throw new Error("Failed to add task.");
       }
 
-      console.log("✅ Task added successfully.");
+      console.log("Task added successfully.");
       loadData();
     } catch (error) {
-      console.error("❌ Error adding task:", error);
+      console.error("Error adding task:", error);
       setError("Failed to add task. Please try again.");
     }
   };
@@ -113,7 +127,9 @@ function TodoApp({ currentUser }) {
   const removeTodo = async (todoId) => {
     try {
       await fetch(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${
+          import.meta.env.VITE_AIRTABLE_BASE_ID
+        }/Tasks/${todoId}`,
         {
           method: "DELETE",
           headers: {
@@ -131,7 +147,9 @@ function TodoApp({ currentUser }) {
   const editTodo = async (todoId, newTitle) => {
     try {
       await fetch(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${
+          import.meta.env.VITE_AIRTABLE_BASE_ID
+        }/Tasks/${todoId}`,
         {
           method: "PATCH",
           headers: {
@@ -156,7 +174,9 @@ function TodoApp({ currentUser }) {
     try {
       const todo = todoList.find((todo) => todo.id === todoId);
       await fetch(
-        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${
+          import.meta.env.VITE_AIRTABLE_BASE_ID
+        }/Tasks/${todoId}`,
         {
           method: "PATCH",
           headers: {
@@ -178,14 +198,15 @@ function TodoApp({ currentUser }) {
   };
 
   // Фильтрация задач
-  const parentTasks = todoList.filter((task) =>
-    currentUser.role === "parent" && Array.isArray(task.assignedTo)
+  const parentTasks = todoList.filter(
+    (task) => currentUser.role === "parent" && Array.isArray(task.assignedTo)
   );
 
-  const childTasks = todoList.filter((task) =>
-    currentUser.role === "child" &&
-    Array.isArray(task.assignedTo) &&
-    task.assignedTo.includes(currentUser.id)
+  const childTasks = todoList.filter(
+    (task) =>
+      currentUser.role === "child" &&
+      Array.isArray(task.assignedTo) &&
+      task.assignedTo.includes(currentUser.id)
   );
 
   // Сортировка задач
@@ -205,7 +226,7 @@ function TodoApp({ currentUser }) {
   };
 
   return (
-    <div className={styles.todoApp}>
+    <div className={styles.todoApp}>      
       <div className="sort-buttons">
         <button
           onClick={() => setSortType("title")}
@@ -234,12 +255,14 @@ function TodoApp({ currentUser }) {
         </>
       )}
       <TodoList
-        todos={sortedTasks(currentUser.role === "parent" ? parentTasks : childTasks)}
+        todos={sortedTasks(
+          currentUser.role === "parent" ? parentTasks : childTasks
+        )}
         onRemoveTodo={removeTodo}
         onEditTodo={editTodo}
         onToggleCompleted={toggleCompleted}
         currentUser={currentUser}
-        users={users || []} 
+        users={users || []}
       />
       {isLoading ? <p>Loading...</p> : error ? <p>{error}</p> : null}
     </div>

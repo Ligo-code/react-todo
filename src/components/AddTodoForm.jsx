@@ -42,7 +42,7 @@ function AddTodoForm({ onAddTodo, users }) {
       setTodoTitle("");
       setAssignedTo("");
     } catch (error) {
-      console.error("❌ Failed to add task:", error);
+      console.error("Failed to add task:", error);
       setError("Failed to add task. Try again!");
     } finally {
       setIsLoading(false);

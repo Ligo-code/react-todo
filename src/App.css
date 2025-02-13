@@ -82,8 +82,19 @@ button:hover {
   position: relative;
 }
 
-.theme-toggle {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.theme-toggle {
+  position: centre;
   top: 20px;
   right: 20px;
 }
@@ -185,12 +196,12 @@ li:hover {
   background: linear-gradient(135deg, #a3c8f3, #055ebe); /* Градиент для светлой темы */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: white; /* Белый текст для контраста */
+  color: white; 
 }
 
 .dark-theme .todo-card {
   background: linear-gradient(135deg, #565b72, #00020c); /* Градиент для темной темы */
-  color: #e0e0e0; /* Светло-серый текст */
+  color: #e0e0e0; 
 }
 
 .sort-buttons {
@@ -256,4 +267,66 @@ li:hover {
   .todo-card {
     width: 80%;
   }
+}
+
+/* Новый стиль для кнопок */
+.header button {
+  margin: 0;
+  padding: 10px 16px;
+  line-height: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-button,
+.theme-toggle {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  line-height: 1;
+  background-color: var(--button-bg);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.header.theme-toggle {
+  align-items: center; /* Теперь этот стиль имеет приоритет */
+}
+
+.home-button:hover,
+.theme-toggle:hover {
+  background-color: var(--button-hover-bg);
+  transform: scale(1.05);
+}
+
+.theme-toggle {
+  border-radius: 50%;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.main-content {
+  padding-top: 60px; /* Отступ сверху, чтобы контент не перекрывался кнопками */
 }

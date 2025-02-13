@@ -35,7 +35,7 @@ function Login({ setIsLoggedIn, setCurrentUser }) {
         const user = data.records[0]; // Если в ответе 1 запись - все ок
 
         setIsLoggedIn(true);
-        console.log("✅ Logged-in user:", user);
+        console.log("Logged-in user:", user);
 
         setCurrentUser({
           id: user.id, // ID пользователя из Airtable
@@ -45,7 +45,7 @@ function Login({ setIsLoggedIn, setCurrentUser }) {
 
         navigate("/app");
       } else if (data.records.length > 1) {
-        console.error("⚠️ Unexpected multiple records found:", data.records);
+        console.error("Unexpected multiple records found:", data.records);
         return setError("Multiple accounts found. Please check Airtable.");
       } else {
         return setError("Invalid username or password.");
