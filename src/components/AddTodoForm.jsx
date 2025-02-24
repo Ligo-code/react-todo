@@ -76,7 +76,7 @@ function AddTodoForm({ onAddTodo, users }) {
               </option>
             ))}
         </select>
-        <button type="submit" className={styles.addButton} disabled={isLoading}>
+        <button type="submit" className={styles.addButton} disabled={isLoading}> {/* condition if loading color change */ } 
           {isLoading ? "Adding..." : "Add"}
         </button>
       </div>

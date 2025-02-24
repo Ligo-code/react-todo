@@ -1,9 +1,8 @@
-import {
-  BrowserRouter,
+import {  
   Routes,
   Route,
-  Navigate,
-  useNavigate,
+  Navigate,  
+  Link,
 } from "react-router-dom";
 import { useState, useContext } from "react";
 import { ThemeContext } from "./ThemeContext";
@@ -12,27 +11,27 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import TodoApp from "./components/TodoApp";
 import "./App.css";
+import { FaHome, FaMoon, FaSun } from "react-icons/fa";
 
 function App() {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null); // Состояние текущего пользователя
-  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null); // Состояние текущего пользователя  
   console.log("App rendered");
 
   return (
     <div className={`app ${isDarkTheme ? "dark-theme" : ""}`}>
       {/*Новый контейнер для кнопок */}
       <div className="header">
-        <button className="home-button" onClick={() => navigate("/")}>
-          🏠 Home
-        </button>
+      <Link to="/" className="nav-link">
+      <FaHome size={20} /> Home
+        </Link>
         <button
           className="theme-toggle"
           onClick={toggleTheme}
           title="Toggle Theme"
         >
-          {isDarkTheme ? "🌞" : "🌜"}
+          {isDarkTheme ? <FaSun size={30} /> : <FaMoon size={30} />}
         </button>
       </div>
       {/* Основной контент */}
