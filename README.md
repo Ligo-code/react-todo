@@ -1,8 +1,21 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🏡 Chores App
 
-Currently, two official plugins are available:
+Chores App is a web application for managing household tasks, where parents can assign tasks to children, and children can mark them as completed.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Features
+
+User registration and login with password hashing (bcrypt.js).
+
+Task assignment to users (parents can assign tasks to children).
+
+Task list with sorting options.
+
+Task deletion and editing (only available to parents).
+
+Task completion marking (available to children).
+
+Light and dark theme support.
+
+Responsive design for mobile and desktop.
