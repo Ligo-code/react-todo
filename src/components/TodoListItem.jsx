@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./TodoListItem.module.css";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, currentUser, users }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -89,10 +90,10 @@ console.log(`Assigned to: ${assignedChildren}`);
           {currentUser.role === "parent" && (
             <div className={styles.ButtonContainer}>
               <button onClick={handleEditClick} className={styles.EditButton}>
-                ✏️
+              <FaEdit size={16} />
               </button>
               <button onClick={handleDeleteClick} className={styles.DeleteButton}>
-                🗑️
+              <FaTrash size={16} />
               </button>
             </div>
           )}

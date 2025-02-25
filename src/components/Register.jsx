@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
+import bcrypt from "bcryptjs";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState(""); // Новый state для роли
+  const [role, setRole] = useState(""); 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const allowedRoles = ["parent", "child"]; // Список разрешенных ролей
+  const allowedRoles = ["parent", "child"];
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -19,21 +20,23 @@ function Register() {
       return;
     }
   
-    // Проверяем, есть ли введенная роль в разрешенных значениях
     if (!allowedRoles.includes(role)) {
       setError(`Invalid role selected: ${role}`);
       return;
     }
-  
+
+    // Хеширование пароля внутри функции
+    const hashedPassword = bcrypt.hashSync(password.trim(), 10);
+
     try {
       const payload = {
         fields: {
           username: username.trim(),
-          password: password.trim(), 
-          role: role, 
+          password: hashedPassword, 
+          role: role,
         },
       };
-  
+
       console.log("🔍 Sending registration data:", JSON.stringify(payload));
   
       const response = await fetch(
@@ -64,7 +67,6 @@ function Register() {
     }
   };
   
-
   return (
     <div className={styles.register}>
       <h2>Register</h2>

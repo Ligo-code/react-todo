@@ -82,17 +82,6 @@ button:hover {
   position: relative;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  z-index: 10;
-}
-
 .theme-toggle {
   position: centre;
   top: 20px;
@@ -321,12 +310,27 @@ li:hover {
 
 .theme-toggle {
   border-radius: 50%;
-  width: 40px;
+  width: 50px;  /* Увеличиваем кнопку */
+  height: 50px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  
+  justify-content: center;  
 }
 
 .main-content {
   padding-top: 60px; /* Отступ сверху, чтобы контент не перекрывался кнопками */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  background-color: var(--button-bg);
+  padding: 10px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--button-hover-bg);
+  transform: scale(1.05);
 }
