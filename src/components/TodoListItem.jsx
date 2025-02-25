@@ -1,11 +1,33 @@
 import React, { useState } from "react";
-import styles from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
+import styles from "./TodoListItem.module.css";
 
-function TodoListItem({ todo, onRemoveTodo, onEditTodo }) {
+function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, currentUser, users }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(todo.title);
   const [isRemoving, setIsRemoving] = useState(false);
+
+  // Проверяем, что `users` передаётся корректно
+  console.log("Users:", users);
+  console.log("Todo assignedTo:", todo.assignedTo);
+
+   // Определяем, на кого назначена задача
+const assignedChildren = Array.isArray(todo.assignedTo) && users.length > 0
+? todo.assignedTo
+    .map((childId) => {
+      console.log(`Searching for childId: ${childId}`);
+      console.log("Available users:", users);
+
+      const child = users.find((user) => user.id === childId);
+
+      console.log("Found child:", child);
+
+      return child ? child.fields?.username || "Unknown" : "Unknown";
+    })
+    .join(", ")
+: "Unassigned";
+
+console.log(`Assigned to: ${assignedChildren}`);
 
   function handleEditClick() {
     setIsEditing(true);
@@ -27,10 +49,10 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo }) {
 
   function handleDeleteClick() {
     setIsRemoving(true);
-    setTimeout(() => onRemoveTodo(todo.id), 300); // Анимация удаления
+    setTimeout(() => onRemoveTodo(todo.id), 300);
   }
 
-  return (
+ return (
     <li className={`${styles.ListItem} ${isRemoving ? styles.removing : ""}`}>
       {isEditing ? (
         <div className={styles.EditContainer}>
@@ -49,15 +71,31 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo }) {
         </div>
       ) : (
         <div className={styles.TaskContainer}>
-          <span className={styles.TaskTitle}>{todo.title}</span>
-          <div className={styles.ButtonContainer}>
-            <button onClick={handleEditClick} className={styles.EditButton}>
-              ✏️
-            </button>
-            <button onClick={handleDeleteClick} className={styles.DeleteButton}>
-              🗑️
-            </button>
-          </div>
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => onToggleCompleted(todo.id)}
+            className={styles.Checkbox}
+          />
+          <span className={`${styles.TaskTitle} ${todo.completed ? styles.completed : ""}`}>
+            {todo.title}
+          </span>
+          {/*Показываем родителю, кому назначена задача */}
+          {currentUser.role === "parent" && (
+            <span className={styles.AssignedTo}>
+              (Assigned to: {assignedChildren})
+            </span>
+          )}
+          {currentUser.role === "parent" && (
+            <div className={styles.ButtonContainer}>
+              <button onClick={handleEditClick} className={styles.EditButton}>
+                ✏️
+              </button>
+              <button onClick={handleDeleteClick} className={styles.DeleteButton}>
+                🗑️
+              </button>
+            </div>
+          )}
         </div>
       )}
     </li>
@@ -68,9 +106,17 @@ TodoListItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    completed: PropTypes.bool,
+    assignedTo: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  onRemoveTodo: PropTypes.func.isRequired,
-  onEditTodo: PropTypes.func.isRequired,
+  onRemoveTodo: PropTypes.func,
+  onEditTodo: PropTypes.func,
+  onToggleCompleted: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+  }).isRequired,
+  users: PropTypes.array.isRequired,
 };
 
 export default TodoListItem;
