@@ -1,206 +1,55 @@
-:root {
-  --background-color: #f7f7fc;
-  --text-color: #1a1a2e;
-  --input-bg: #ffffff;
-  --input-text: #333;
-  --button-bg: #007bff;
-  --button-hover-bg: #0056b3;
-  --task-bg: #ffffff;
-  --task-text: #333;
-  --task-border: #e0e0e0;
-  --task-hover-bg: #f0f0f0;
-  --theme-toggle-bg: #007bff;
-  --theme-toggle-color: #ffffff;
-}
-
-.dark-theme {
-  --background-color: #072c5c; /* Темный цвет фона */
-  --text-color: #e0e0e0;
-  --input-bg: #2a2a40;
-  --input-text: #e0e0e0;
-  --button-bg: #5454bf;
-  --button-hover-bg: #383875;
-  --task-bg: #2a2a40;
-  --task-text: #e0e0e0;
-  --task-border: #444;
-  --task-hover-bg: #33334d;
-  --theme-toggle-bg: #0056b3;
-  --theme-toggle-color: #ffffff;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: "Roboto", sans-serif;
-  background-color: var(--background-color);
-  background-image: url('/pattern.svg'); /* Паттерн для светлой темы */
-  background-size: 64px 64px; /* Размер паттерна */
-  background-repeat: repeat; /* Повторение паттерна */
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dark-theme body {
-  background-color: var(--background-color);
-  background-image: url('/patternDark.svg'); /* Паттерн для темной темы */
-  background-size: 64px 64px;
-  background-repeat: repeat;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007bff;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  background-color: var(--button-bg);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--button-hover-bg);
-}
-
+/* Основной контейнер приложения */
 .app {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем содержимое по горизонтали */
 }
 
-.theme-toggle {
-  position: centre;
-  top: 20px;
-  right: 20px;
-}
-
-.theme-toggle button {
-  background-color: var(--theme-toggle-bg);
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  color: var(--theme-toggle-color);
-}
-
-.theme-toggle button:hover {
-  opacity: 0.9;
-}
-
-.main-content {
+/* Центрирование задач */
+.taskContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
+  max-width: 800px; /* Ограничиваем ширину контейнера */
+  margin: 0 auto;
+  gap: 15px;
 }
 
-.app-logo {
-  width: 120px;
-  height: auto;
-  display: block;
-  margin: 0 auto 20px;
-}
-
-form {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 540px;
-}
-
-input[type="text"] {
-  flex-grow: 1;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid var(--task-border);
-  border-radius: 4px;
-  background-color: var(--input-bg);
-  color: var(--input-text);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-input[type="text"]:hover {
-  background-color: var(--task-hover-bg);
-}
-
-input[type="text"]:focus {
-  border-color: var(--button-bg);
-  outline: none;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 540px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-li {
-  background-color: var(--task-bg);
-  color: var(--task-text);
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-li:hover {
-  background-color: var(--task-hover-bg);
-}
-
-.button-container {
-  display: flex;
-  gap: 10px;
-}
-
+/* Карточки задач */
 .todo-card {
-  width: 90%;
-  max-width: 540px;
+  width: 100%; /* Занимаем всю доступную ширину */
+  max-width: 800px; /* Ограничиваем ширину карточки */
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #a3c8f3, #055ebe); /* Градиент для светлой темы */
+  background: linear-gradient(135deg, #a3c8f3, #055ebe);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: white; 
+  color: white;
 }
 
 .dark-theme .todo-card {
-  background: linear-gradient(135deg, #565b72, #00020c); /* Градиент для темной темы */
-  color: #e0e0e0; 
+  background: linear-gradient(135deg, #565b72, #00020c);
+  color: #e0e0e0;
 }
 
+/* Кнопки сортировки */
 .sort-buttons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
 }
 
 .sort-buttons button {
-  padding: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 130px;
   background-color: var(--button-bg);
   color: white;
   border: none;
@@ -214,8 +63,86 @@ li:hover {
 }
 
 .sort-buttons button.active {
-  background-color: var(--button-hover-bg);
+  background-color: #2b3a52;
   font-weight: bold;
+}
+
+/* Стили для заголовков */
+h1, h2 {
+  font-size: 2.2em;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #3c86d5;
+}
+
+/* Стили для хедера */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header button {
+  margin: 0;
+  padding: 10px 16px;
+  line-height: 1;
+}
+
+.home-button,
+.theme-toggle {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #3c86d5;;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover,
+.theme-toggle:hover {
+  background-color: #454c64;
+  transform: scale(1.05);
+}
+
+/* Кнопка смены темы */
+.theme-toggle {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.main-content {
+  padding-top: 60px;
+}
+
+/* Ссылки */
+.nav-link {
+  text-decoration: none;
+  color: white;
+  background-color:  #3c86d5;
+  padding: 10px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #454c64;
+  transform: scale(1.05);
 }
 
 /* Медиа-запросы для мобильных устройств */
@@ -256,81 +183,4 @@ li:hover {
   .todo-card {
     width: 80%;
   }
-}
-
-/* Новый стиль для кнопок */
-.header button {
-  margin: 0;
-  padding: 10px 16px;
-  line-height: 1;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: var(--background-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.home-button,
-.theme-toggle {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  border: none;
-  padding: 10px 16px;
-  font-size: 16px;
-  line-height: 1;
-  background-color: var(--button-bg);
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.header.theme-toggle {
-  align-items: center; /* Теперь этот стиль имеет приоритет */
-}
-
-.home-button:hover,
-.theme-toggle:hover {
-  background-color: var(--button-hover-bg);
-  transform: scale(1.05);
-}
-
-.theme-toggle {
-  border-radius: 50%;
-  width: 50px;  /* Увеличиваем кнопку */
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;  
-}
-
-.main-content {
-  padding-top: 60px; /* Отступ сверху, чтобы контент не перекрывался кнопками */
-}
-
-.nav-link {
-  text-decoration: none;
-  color: white;
-  background-color: var(--button-bg);
-  padding: 10px 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.nav-link:hover {
-  background-color: var(--button-hover-bg);
-  transform: scale(1.05);
 }

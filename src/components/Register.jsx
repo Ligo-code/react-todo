@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import bcrypt from "bcryptjs";
@@ -96,3 +96,4 @@ function Register() {
 }
 
 export default Register;
+*/

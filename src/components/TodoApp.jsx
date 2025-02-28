@@ -211,19 +211,21 @@ function TodoApp({ currentUser }) {
 
   // Сортировка задач
   const sortedTasks = (tasks) => {
-    return [...tasks].sort((a, b) => {
-      if (sortType === "title") {
-        return sortOrder === "asc"
-          ? a.title.localeCompare(b.title)
-          : b.title.localeCompare(a.title);
-      } else if (sortType === "createdTime") {
-        return sortOrder === "asc"
-          ? new Date(a.createdTime) - new Date(b.createdTime)
-          : new Date(b.createdTime) - new Date(a.createdTime);
-      }
-      return 0;
-    });
+    return [...tasks].filter(task => task.title) // Убираем задачи без title
+      .sort((a, b) => {
+        if (sortType === "title") {
+          return sortOrder === "asc"
+            ? (a.title || "").localeCompare(b.title || "")
+            : (b.title || "").localeCompare(a.title || "");
+        } else if (sortType === "createdTime") {
+          return sortOrder === "asc"
+            ? new Date(a.createdTime) - new Date(b.createdTime)
+            : new Date(b.createdTime) - new Date(a.createdTime);
+        }
+        return 0;
+      });
   };
+  
 
   return (
     <div className={styles.todoApp}>      

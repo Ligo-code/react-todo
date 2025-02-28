@@ -1,11 +1,13 @@
 .ListItem {
   display: flex;
+  width: 100%; /* Убираем фиксированное увеличение ширины */
+  max-width: 800px; /* Ограничиваем ширину карточки */
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: var(--task-bg);
-  color: var(--task-text);
+  padding: 12px;
+  margin: 10px auto; /* Центрируем */
+  background-color: #64acfa;
+  color: #f4f6f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -18,14 +20,19 @@
 }
 
 .ListItem:hover {
-  background-color: var(--task-hover-bg);
+  background-color: #2461a3;
 }
 
+/* Контейнер редактирования */
 .EditContainer {
   display: flex;
   gap: 10px;
+  width: 100%; /* Растягиваем по ширине */
+  justify-content: flex-end; /* Выравниваем кнопки справа */
+  align-items: center;
 }
 
+/* Контейнер для задачи */
 .TaskContainer {
   display: flex;
   align-items: center;
@@ -33,54 +40,66 @@
   width: 100%;
 }
 
+/* Контейнер для кнопок */
 .ButtonContainer {
   display: flex;
   gap: 10px;
+  justify-content: flex-end; /* Выравниваем кнопки справа */
+  align-items: center;
 }
 
+/* Входное поле для редактирования */
 .Input {
   flex-grow: 1;
   padding: 10px;
   font-size: 14px;
   border: 1px solid var(--task-border);
   border-radius: 4px;
-  background-color: var(--input-bg);
+  background-color: #3c86d5;
   color: var(--input-text);
+  
 }
 
+/* Общий стиль для кнопок */
 .SaveButton,
 .CancelButton,
 .EditButton,
 .DeleteButton {
-  padding: 6px 8px;
-  font-size: 12px;
+  padding: 8px 12px;
+  font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease;
-  width: 70px;
+  width: 80px; 
+  text-align: center;
+  height: 36px; 
+  
+ 
 }
 
+/* Цвета кнопок */
 .SaveButton {
-  background-color: #28a745;
+  background-color: #3c86d5;
   color: white;
 }
 
 .CancelButton {
-  background-color: #dc3545;
+  background-color: #ef5c6b;
   color: white;
 }
 
 .EditButton {
-  background-color: #007bff;
+  background-color: #3c86d5;
   color: white;
 }
 
 .DeleteButton {
-  background-color: #dc3545;
+  background-color: #ef5c6b;
   color: white;
 }
 
+/* Эффект наведения */
 .SaveButton:hover,
 .CancelButton:hover,
 .EditButton:hover,
@@ -88,11 +107,62 @@
   opacity: 0.9;
 }
 
+/* Чекбокс */
 .Checkbox {
   margin-right: 10px;
+  cursor: pointer;
 }
 
+/* Отмеченные задачи */
 .completed {
   text-decoration: line-through;
   opacity: 0.7;
+}
+
+/* Контейнер для текста задачи */
+.TextContainer {
+  display: flex;
+  flex-direction: column; /* Assigned to на новой строке */
+  text-align: left;
+  flex-grow: 1; /* Растягивается, чтобы кнопки не прижимались */
+}
+
+/* Assigned to переносится вниз */
+.AssignedTo {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #f4f6f9;
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 768px) {
+  .ListItem {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .TaskContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .ButtonContainer {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  .Checkbox {
+    margin-right: 10px;
+  }
+
+  .SaveButton,
+  .CancelButton,
+  .EditButton,
+  .DeleteButton {
+    width: auto; /* Адаптивный размер кнопок */
+  }
 }

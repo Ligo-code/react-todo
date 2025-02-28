@@ -1,10 +1,11 @@
-.register {
+/*.register {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     text-align: center;
+    color: #3c86d5;
   }
   
   .register h2 {
@@ -26,7 +27,7 @@
   
   .register button {
     padding: 0.75rem;
-    background-color: #007bff;
+    background-color: #3c86d5;
     color: white;
     border: none;
     border-radius: 4px;
@@ -35,10 +36,10 @@
   }
   
   .register button:hover {
-    background-color: #0056b3;
+    background-color: #454c64;
   }
   
   .error {
     color: red;
     margin-bottom: 1rem;
-  }
+  }*/

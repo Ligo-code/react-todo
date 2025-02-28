@@ -1,46 +1,129 @@
-.todo-card {
-  background-color: var(--task-bg);
-  color: var(--task-text);
-  border: 1px solid var(--task-border);
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 800px; /* Увеличим максимальную ширину контейнера */
+  margin: 0 auto;
+  padding-bottom: 80px; /* Оставляем место под пагинацию */
+}
+
+/* Список задач */
+.todoList {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  max-width: 800px; /* Ограничиваем ширину списка задач */
+  margin: 0 auto;
+}
+
+/* Карточки задач */
+.todoList li {
+  width: 100%;
+  max-width: 800px; /* Ограничиваем ширину карточки */
+  text-align: left;
+  background-color: #64acfa;
+  padding: 12px;
   border-radius: 8px;
-  padding: 15px;
+  box-shadow: 0 2px 4px rgba(122, 144, 192, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+  word-wrap: break-word;
+  white-space: normal;
+  gap: 10px;
 }
 
-.todo-card:hover {
-  background-color: var(--task-hover-bg);
+/* Контейнер для чекбокса и текста */
+.taskContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  text-align: left;
 }
 
-.ListItem {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+/* Чекбокс */
+.taskCheckbox {
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-.ListItem.removing {
-  opacity: 0;
-  transform: translateX(-100%);
+/* Текст задачи */
+.taskText {
+  flex-grow: 1;
+  text-align: left;
 }
 
+/* Кнопки */
+.taskActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end; /* Выровнены справа */
+}
+
+/* Фиксируем футер внизу */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #a4c5ea, #134b88);
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Пагинация */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 15px;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  padding-bottom: 15px;
 }
 
 .pagination button {
-  padding: 5px 10px;
-  background-color: #007bff;
+  padding: 8px 16px;
+  min-width: 180px;
+  background-color: #3c86d5;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pagination button:hover {
+  background-color: #454c64;
 }
 
 .pagination button:disabled {
-  background-color: #ccc;
+  background-color: #b3b9c5;
   cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 110px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

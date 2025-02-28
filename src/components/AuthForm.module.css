@@ -1,0 +1,87 @@
+.authContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 50px auto;
+    background: #c6e1fb;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  /* Заголовок */
+  h2 {
+    font-size: 26px;
+    color: #3c86d5;
+    margin-bottom: 20px;
+  }
+  
+  /* Поля ввода */
+  input, select {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus, select:focus {
+    border-color: #3c86d5;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3);
+  }
+  
+  /* Кнопка */
+  button {
+    width: 25%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #3c86d5;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #454c64;
+  }
+  
+  /* Тёмная тема */
+  .dark-theme .authContainer {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+  
+  .dark-theme h2 {
+    color: #87ceeb;
+  }
+  
+  .dark-theme input, 
+  .dark-theme select {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+  }
+  
+  .dark-theme button {
+    background: #5454bf;
+  }
+  
+  .dark-theme button:hover {
+    background: #383875;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 1rem;
+  }
+  
