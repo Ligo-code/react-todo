@@ -19,15 +19,11 @@ function TodoApp({ currentUser }) {
     const loadUsers = async () => {
       try {
         const response = await fetch(
-          `https://api.airtable.com/v0/${
-            import.meta.env.VITE_AIRTABLE_BASE_ID
-          }/Users`,
+          `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Users`,
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${
-                import.meta.env.VITE_AIRTABLE_API_TOKEN
-              }`,
+              Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
             },
           }
         );
@@ -52,10 +48,11 @@ function TodoApp({ currentUser }) {
 
   const loadData = async () => {
     try {
+      setIsLoading(true);
+      setError("");
+
       const response = await fetch(
-        `https://api.airtable.com/v0/${
-          import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/Tasks`,
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks`,
         {
           method: "GET",
           headers: {
@@ -68,13 +65,16 @@ function TodoApp({ currentUser }) {
       const data = await response.json();
       console.log("Tasks from Airtable:", data.records);
 
-      const tasks = data.records.map((record) => ({
-        id: record.id,
-        title: record.fields.Title,
-        createdTime: record.fields.createdTime,
-        completed: record.fields.completed || false,
-        assignedTo: record.fields.assigned_to || [],
-      }));
+      const tasks = data.records
+        .map((record) => ({
+          id: record.id,
+          title: record.fields?.Title || "Untitled Task",
+          createdTime: record.fields?.createdTime || new Date().toISOString(),
+          completed: record.fields?.completed || false,
+          assignedTo: record.fields?.assigned_to || [],
+        }))
+        .filter((task) => task.title); // Убираем задачи без названия
+
       setTodoList(tasks);
     } catch (error) {
       console.error("Error loading tasks:", error);
@@ -91,9 +91,7 @@ function TodoApp({ currentUser }) {
         : [assignedTo];
 
       const response = await fetch(
-        `https://api.airtable.com/v0/${
-          import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/Tasks`,
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks`,
         {
           method: "POST",
           headers: {
@@ -111,8 +109,6 @@ function TodoApp({ currentUser }) {
       );
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error adding task:", errorData);
         throw new Error("Failed to add task.");
       }
 
@@ -127,9 +123,7 @@ function TodoApp({ currentUser }) {
   const removeTodo = async (todoId) => {
     try {
       await fetch(
-        `https://api.airtable.com/v0/${
-          import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
         {
           method: "DELETE",
           headers: {
@@ -147,9 +141,7 @@ function TodoApp({ currentUser }) {
   const editTodo = async (todoId, newTitle) => {
     try {
       await fetch(
-        `https://api.airtable.com/v0/${
-          import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
         {
           method: "PATCH",
           headers: {
@@ -173,10 +165,10 @@ function TodoApp({ currentUser }) {
   const toggleCompleted = async (todoId) => {
     try {
       const todo = todoList.find((todo) => todo.id === todoId);
+      if (!todo) return;
+
       await fetch(
-        `https://api.airtable.com/v0/${
-          import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/Tasks/${todoId}`,
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Tasks/${todoId}`,
         {
           method: "PATCH",
           headers: {
@@ -210,25 +202,22 @@ function TodoApp({ currentUser }) {
   );
 
   // Сортировка задач
-  const sortedTasks = (tasks) => {
-    return [...tasks].filter(task => task.title) // Убираем задачи без title
-      .sort((a, b) => {
-        if (sortType === "title") {
-          return sortOrder === "asc"
-            ? (a.title || "").localeCompare(b.title || "")
-            : (b.title || "").localeCompare(a.title || "");
-        } else if (sortType === "createdTime") {
-          return sortOrder === "asc"
-            ? new Date(a.createdTime) - new Date(b.createdTime)
-            : new Date(b.createdTime) - new Date(a.createdTime);
-        }
-        return 0;
-      });
-  };
-  
+  const sortedTasks = (tasks) =>
+    [...tasks].sort((a, b) => {
+      if (sortType === "title") {
+        return sortOrder === "asc"
+          ? (a.title || "").localeCompare(b.title || "")
+          : (b.title || "").localeCompare(a.title || "");
+      } else if (sortType === "createdTime") {
+        return sortOrder === "asc"
+          ? new Date(a.createdTime) - new Date(b.createdTime)
+          : new Date(b.createdTime) - new Date(a.createdTime);
+      }
+      return 0;
+    });
 
   return (
-    <div className={styles.todoApp}>      
+    <div className={styles.todoApp}>
       <div className="sort-buttons">
         <button
           onClick={() => setSortType("title")}
@@ -243,9 +232,7 @@ function TodoApp({ currentUser }) {
           Sort by Created Time
         </button>
         <button
-          onClick={() =>
-            setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
-          }
+          onClick={() => setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))}
         >
           {sortOrder === "asc" ? "Descending" : "Ascending"}
         </button>
@@ -257,16 +244,14 @@ function TodoApp({ currentUser }) {
         </>
       )}
       <TodoList
-        todos={sortedTasks(
-          currentUser.role === "parent" ? parentTasks : childTasks
-        )}
+        todos={sortedTasks(currentUser.role === "parent" ? parentTasks : childTasks)}
         onRemoveTodo={removeTodo}
         onEditTodo={editTodo}
         onToggleCompleted={toggleCompleted}
         currentUser={currentUser}
         users={users || []}
       />
-      {isLoading ? <p>Loading...</p> : error ? <p>{error}</p> : null}
+      {isLoading ? <p>Loading...</p> : error ? <p className="error">{error}</p> : null}
     </div>
   );
 }

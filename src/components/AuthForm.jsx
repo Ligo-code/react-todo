@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
+/*import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
-import { ThemeContext } from "../ThemeContext"; // Подключаем контекст темы
+import { ThemeContext } from "../ThemeContext";
 import styles from "./AuthForm.module.css";
 
 function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
-  const { isDarkTheme } = useContext(ThemeContext); // Получаем текущую тему
+  const { isDarkTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState(""); // Только для регистрации
+  const [role, setRole] = useState("");
   const [error, setError] = useState("");
 
   const allowedRoles = ["parent", "child"];
@@ -27,8 +27,7 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
         setError(`Invalid role selected: ${role}`);
         return;
       }
-      
-      // Хеширование пароля перед отправкой
+
       const hashedPassword = bcrypt.hashSync(password.trim(), 10);
 
       try {
@@ -39,8 +38,6 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
             role: role,
           },
         };
-
-        console.log("🔍 Sending registration data:", JSON.stringify(payload));
 
         const response = await fetch(
           `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Users`,
@@ -59,17 +56,13 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
           throw new Error(errorData.error?.message || "Failed to register user.");
         }
 
-        console.log("✅ User registered successfully!");
         navigate("/login");
 
       } catch (error) {
-        console.error("Registration error:", error);
         setError(error.message || "Failed to register user.");
       }
     } else {
-      // Логин
       try {
-        console.log("Attempting to log in with:", { username, password });
         const response = await fetch(
           `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Users?filterByFormula={username}='${username}'`,
           {
@@ -85,8 +78,6 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
         }
 
         const data = await response.json();
-        console.log("User data:", data);
-
         if (data.records.length === 1) {
           const user = data.records[0];
           const hashedPassword = user.fields.password;
@@ -98,7 +89,6 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
               username: user.fields.username,
               role: user.fields.role,
             });
-            console.log("✅ Login successful!");
             navigate("/app");
           } else {
             setError("Invalid username or password.");
@@ -107,7 +97,6 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
           setError("Invalid username or password.");
         }
       } catch (error) {
-        console.error("Login error:", error);
         setError("Failed to login. Please try again.");
       }
     }
@@ -144,3 +133,4 @@ function AuthForm({ type, setIsLoggedIn, setCurrentUser }) {
 }
 
 export default AuthForm;
+*/

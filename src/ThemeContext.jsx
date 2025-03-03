@@ -3,17 +3,14 @@ import React, { createContext, useState, useEffect } from "react";
 export const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [isDarkTheme, setIsDarkTheme] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
+    // Добавляем или удаляем класс dark-theme у body
     if (isDarkTheme) {
       document.body.classList.add("dark-theme");
-      localStorage.setItem("theme", "dark");
     } else {
       document.body.classList.remove("dark-theme");
-      localStorage.setItem("theme", "light");
     }
   }, [isDarkTheme]);
 
@@ -25,5 +22,3 @@ export function ThemeProvider({ children }) {
     </ThemeContext.Provider>
   );
 }
-
-export default ThemeProvider;

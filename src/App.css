@@ -1,3 +1,4 @@
+
 /* Основной контейнер приложения */
 .app {
   width: 100%;
@@ -7,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Центрируем содержимое по горизонтали */
+  justify-content: center; /* Центрируем содержимое по вертикали */
 }
 
 /* Центрирование задач */
@@ -14,28 +16,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  max-width: 800px; /* Ограничиваем ширину контейнера */
+  max-width: 600px; /* Подстраиваем под кнопки */
   margin: 0 auto;
-  gap: 15px;
 }
-
 /* Карточки задач */
 .todo-card {
-  width: 100%; /* Занимаем всю доступную ширину */
-  max-width: 800px; /* Ограничиваем ширину карточки */
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #a3c8f3, #055ebe);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #a3c8f3, #055ebe); /* Градиент для светлой темы */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: white;
+  color: white; 
 }
 
 .dark-theme .todo-card {
-  background: linear-gradient(135deg, #565b72, #00020c);
-  color: #e0e0e0;
+  background: linear-gradient(135deg, #565b72, #00020c); /* Градиент для темной темы */
+  color: #e0e0e0; 
 }
 
 /* Кнопки сортировки */
@@ -50,7 +54,7 @@
   padding: 8px 12px;
   font-size: 14px;
   min-width: 130px;
-  background-color: var(--button-bg);
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -59,7 +63,7 @@
 }
 
 .sort-buttons button:hover {
-  background-color: var(--button-hover-bg);
+  background-color: var(--button-hover);
 }
 
 .sort-buttons button.active {
@@ -73,7 +77,7 @@ h1, h2 {
   text-align: center;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #3c86d5;
+  color: var(--primary-color);
 }
 
 /* Стили для хедера */
@@ -82,7 +86,7 @@ h1, h2 {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: var(--background-color);
+  background-color: var(--background-color-light);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
@@ -106,7 +110,7 @@ h1, h2 {
   border: none;
   padding: 10px 16px;
   font-size: 16px;
-  background-color: #3c86d5;;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 4px;
   cursor: pointer;
@@ -115,7 +119,7 @@ h1, h2 {
 
 .home-button:hover,
 .theme-toggle:hover {
-  background-color: #454c64;
+  background-color: var(--button-hover);
   transform: scale(1.05);
 }
 
@@ -127,21 +131,25 @@ h1, h2 {
 }
 
 .main-content {
-  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* Ссылки */
 .nav-link {
   text-decoration: none;
   color: white;
-  background-color:  #3c86d5;
+  background-color: var(--primary-color);
   padding: 10px 16px;
   border-radius: 4px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-link:hover {
-  background-color: #454c64;
+  background-color: var(--button-hover);
   transform: scale(1.05);
 }
 

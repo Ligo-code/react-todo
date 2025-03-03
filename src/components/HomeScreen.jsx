@@ -6,7 +6,7 @@ function HomeScreen() {
   return (
     <div className={styles.homeScreen}>
       <h1>Welcome to Chores App!</h1>
-      <h2>Manage your household chores easily!</h2>
+      <p>Manage your household chores easily.</p>
       <div className={styles.buttons}>
         <Link to="/register" className={styles.button}>
           Register

@@ -5,75 +5,32 @@
   justify-content: center;
   height: 100vh;
   text-align: center;
-  background-color: #c7e1fe;
-  background-image: url('/pattern.svg');
-  background-size: 64px 64px;
-  background-repeat: repeat;
-  padding: 20px;
 }
 
-/* Исправляем темный режим */
-.dark-theme {
-  background-color: #1e314b;
-  background-image: url('/patternDark.svg');
-}
-
-/* Главное содержимое должно быть прозрачным */
-.appContainer, .homeScreen {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: transparent; /* Убираем фон */
-}
-
-/* Заголовки и текст */
-.homeScreen h1,
-.homeScreen h2 {
+.homeScreen h1 {
   font-size: 2.5rem;
-  color: #3c86d5; /* Глобальный цвет */
+  margin-bottom: 1rem;
 }
 
-.homeScreen h2 {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
+.homeScreen p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-/* Контейнер кнопок */
 .buttons {
   display: flex;
   gap: 1rem;
 }
 
-/* Стили кнопок */
 .button {
   padding: 0.75rem 1.5rem;
-  background-color: #3c86d5;
+  background-color: #007bff;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #454c64;
-  transform: scale(1.05);
-}
-
-
-
-/* Медиа-запрос для мобильных устройств */
-@media (max-width: 600px) {
-  .buttons {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .button {
-    width: 100%;
-    text-align: center;
-  }
+  background-color: #0056b3;
 }

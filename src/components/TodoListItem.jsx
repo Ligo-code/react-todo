@@ -8,16 +8,27 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, curre
   const [editedTitle, setEditedTitle] = useState(todo.title);
   const [isRemoving, setIsRemoving] = useState(false);
 
-  // Определяем, на кого назначена задача
-  const assignedChildren =
-    Array.isArray(todo.assignedTo) && users.length > 0
-      ? todo.assignedTo
-          .map((childId) => {
-            const child = users.find((user) => user.id === childId);
-            return child ? child.fields?.username || "Unknown" : "Unknown";
-          })
-          .join(", ")
-      : "Unassigned";
+  // Проверяем, что `users` передаётся корректно
+  console.log("Users:", users);
+  console.log("Todo assignedTo:", todo.assignedTo);
+
+   // Определяем, на кого назначена задача
+const assignedChildren = Array.isArray(todo.assignedTo) && users.length > 0
+? todo.assignedTo
+    .map((childId) => {
+      console.log(`Searching for childId: ${childId}`);
+      console.log("Available users:", users);
+
+      const child = users.find((user) => user.id === childId);
+
+      console.log("Found child:", child);
+
+      return child ? child.fields?.username || "Unknown" : "Unknown";
+    })
+    .join(", ")
+: "Unassigned";
+
+console.log(`Assigned to: ${assignedChildren}`);
 
   function handleEditClick() {
     setIsEditing(true);
@@ -42,7 +53,7 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, curre
     setTimeout(() => onRemoveTodo(todo.id), 300);
   }
 
-  return (
+ return (
     <li className={`${styles.ListItem} ${isRemoving ? styles.removing : ""}`}>
       {isEditing ? (
         <div className={styles.EditContainer}>
@@ -51,7 +62,6 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, curre
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
             className={styles.Input}
-            style={{width: '210px'}}
           />
           <button onClick={handleSaveClick} className={styles.SaveButton}>
             Save
@@ -61,37 +71,35 @@ function TodoListItem({ todo, onRemoveTodo, onEditTodo, onToggleCompleted, curre
           </button>
         </div>
       ) : (
-        <div className={styles.TaskContainer}>
-          {/* Левая часть: Чекбокс + Текст */}
-          <div className={styles.LeftContainer}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => onToggleCompleted(todo.id)}
-              className={styles.Checkbox}
-            />
-            <div className={styles.TextContainer}>
-              <span className={`${styles.TaskTitle} ${todo.completed ? styles.completed : ""}`}>
-                {todo.title}
-              </span>
-              {currentUser.role === "parent" && (
-                <span className={styles.AssignedTo}>(Assigned to: {assignedChildren})</span>
-              )}
-            </div>
-          </div>
-
-          {/* Правая часть: Кнопки */}
-          {currentUser.role === "parent" && (
-            <div className={styles.RightContainer}>
-              <button onClick={handleEditClick} className={styles.EditButton}>
-                <FaEdit size={16} />
-              </button>
-              <button onClick={handleDeleteClick} className={styles.DeleteButton}>
-                <FaTrash size={16} />
-              </button>
-            </div>
-          )}
-        </div>
+<div className={styles.TaskContainer}>
+  <input
+    type="checkbox"
+    checked={todo.completed}
+    onChange={() => onToggleCompleted(todo.id)}
+    className={styles.Checkbox}
+  />
+  <div className={styles.TextWrapper}>
+    <span className={`${styles.TaskTitle} ${todo.completed ? styles.completed : ""}`}>
+      {todo.title}
+    </span>
+    {/* Показываем родителю, кому назначена задача */}
+    {currentUser.role === "parent" && (
+      <span className={styles.AssignedTo}>
+        (Assigned to: {assignedChildren})
+      </span>
+    )}
+  </div>
+  {currentUser.role === "parent" && (
+    <div className={styles.ButtonContainer}>
+      <button onClick={handleEditClick} className={styles.EditButton}>
+        <FaEdit size={16} />
+      </button>
+      <button onClick={handleDeleteClick} className={styles.DeleteButton}>
+        <FaTrash size={16} />
+      </button>
+    </div>
+  )}
+</div>
       )}
     </li>
   );

@@ -50,44 +50,38 @@ function AddTodoForm({ onAddTodo, users }) {
   };
 
   return (
-<form onSubmit={handleAddTodo} className={styles.form}>
-  {/* Поле ввода теперь наверху */}
-  <div className={styles.inputContainer}>
-    <InputWithLabel
-      id="todoTitle"
-      value={todoTitle}
-      onInputChange={handleTitleChange}
-      type="text"
-      placeholder="Enter a title"
-      className={styles.input}
-      disabled={isLoading}
-    />
-  </div>
-
-  {/* Контейнер для селекта и кнопки */}
-  <div className={styles.actionContainer}>
-    <select
-      value={assignedTo}
-      onChange={handleAssignedToChange}
-      className={styles.select}
-      disabled={isLoading}
-    >
-      <option value="">Assign to...</option>
-      {users
-        ?.filter((user) => user.fields.role === "child")
-        .map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.fields.username}
-          </option>
-        ))}
-    </select>
-    <button type="submit" className={styles.addButton} disabled={isLoading}>
-      {isLoading ? "Adding..." : "Add"}
-    </button>
-  </div>
-
-  {error && <p className={styles.error}>{error}</p>}
-</form>
+    <form onSubmit={handleAddTodo} className={styles.form}>
+      <div className={styles.inputContainer}>
+        <InputWithLabel
+          id="todoTitle"
+          value={todoTitle}
+          onInputChange={handleTitleChange}
+          type="text"
+          placeholder="Enter a title"
+          className={styles.input}
+          disabled={isLoading}
+        />
+        <select
+          value={assignedTo}
+          onChange={handleAssignedToChange}
+          className={styles.select}
+          disabled={isLoading}
+        >
+          <option value="">Assign to...</option>
+          {users
+            ?.filter((user) => user.fields.role === "child")
+            .map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.fields.username}
+              </option>
+            ))}
+        </select>
+        <button type="submit" className={styles.addButton} disabled={isLoading}> {/* condition if loading color change */ } 
+          {isLoading ? "Adding..." : "Add"}
+        </button>
+      </div>
+      {error && <p className={styles.error}>{error}</p>}
+    </form>
   );
 }
 
