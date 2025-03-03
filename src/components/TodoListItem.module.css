@@ -1,17 +1,21 @@
 .ListItem {
   display: flex;   
-  align-items: center;
-  
+  align-items: center;  
   justify-content: space-between;
   padding: 12px;
   margin: 5px auto; /* Центрируем */
-  background-color: #96a1ad;
-  color: var(--task-text);
+  background-color: #bcc4cc;
+  color: black;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
   
 }
+
+.dark-theme .ListItem {
+  background-color: #2a2a40;
+  color: #131111; 
+} 
 
 .ListItem.removing {
   opacity: 0;
@@ -20,7 +24,7 @@
 }
 
 .ListItem:hover {
-  background-color: #2676cb;
+  background-color: #7b858d;
 }
 
 /* Контейнер редактирования */
@@ -68,22 +72,22 @@
 
 /* Цвета кнопок */
 .SaveButton {
-  background-color: #28a745;
+  background-color: #3c86d5;
   color: white;
 }
 
 .CancelButton {
-  background-color: #dc3545;
+  background-color: #d0525f;
   color: white;
 }
 
 .EditButton {
-  background-color: #007bff;
+  background-color: #3c86d5;
   color: white;
 }
 
 .DeleteButton {
-  background-color: #dc3545;
+  background-color: #d0525f;
   color: white;
 }
 
@@ -126,7 +130,7 @@
   display: block;
   margin-top: 5px;
   font-size: 0.9em;
-  color: #667;
+  color: black;
 }
 
 /* Медиа-запросы для мобильных устройств */

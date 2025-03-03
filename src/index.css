@@ -1,55 +1,58 @@
 :root {
   /* Светлая тема */
-  --background-color: #f7f7fc;
-  --text-color: #333;
+  --background-color: #cdebfb;
+  --text-color: black;
   --input-bg: #ffffff;
   --input-text: #333;
-  --button-bg: #007bff;
+  --button-bg: #64a7c4;
   --button-hover-bg: #0056b3;
   --task-bg: #ffffff;
-  --task-text: #333;
+  --task-text: black;
   --task-border: #e0e0e0;
   --task-hover-bg: #f0f0f0;
   --theme-toggle-bg: #87ceeb;
   --theme-toggle-color: #ffd700;
-  --background-color-light: #cfe2f3; /* Light background for main area */
+  --background-color-light: #cdebfb; /* Light background for main area */
   --background-color-dark: #1e314b; /* Dark theme background */
   --primary-color: #64a7c4; /* A cool blue for buttons and highlights */
   --secondary-color: #f8c5d0; /* A soft pinkish hue for accents */
   --tertiary-color: #a9c5d3; /* A light blue for backgrounds */
   --button-hover: #3a6186; /* Hover effect for buttons */
   --input-background: #ffffff; /* White background for inputs */
-  --input-text-color: #333; /* Dark text for better readability */
+  --input-text-color: black; /* Dark text for better readability */
   --text-color: #1a1a2e; /* Primary text color */
   --error-color: #ff4c4c; /* Error message color */
   --input-border: #dcdcdc; /* Input border color */
+  --bg-footer: var(--neutral-100);
+  --text-secondary: #718096;
 }
 
 .dark-theme {
   /* Темная тема */
-  --background-color: #1a1a2e;
+  --background-color: #0d2741;
   --text-color: rgba(255, 255, 255, 0.87);
   --input-bg: #2a2a40;
   --input-text: #e0e0e0;
-  --button-bg: #5454bf;
-  --button-hover-bg: #383875;
+  --button-bg: #64a7c4;
+  --button-hover-bg: #0056b3;
   --task-bg: #2a2a40;
   --task-text: #e0e0e0;
   --task-border: #444;
   --task-hover-bg: #33334d;
-  --theme-toggle-bg: #1a1a40;
-  --theme-toggle-color: #ffd700;
+  --theme-toggle-bg: #1a1a40;  
   --background-color-light: #292948;
-  --background-color-dark: #1e314b;
+  --background-color-dark: #0d2741;
   --primary-color: #4f93bb;
   --secondary-color: #f4a8c4;
   --tertiary-color: #4c6781;
-  --button-hover: #2c4b69;
+  --button-hover: #0056b3;
   --input-background: #444;
   --input-text-color: #e0e0e0;
   --text-color: #e0e0e0;
   --error-color: #ff7070;
   --input-border: #555;
+  --bg-footer: var(--neutral-800);
+  --text-secondary: #a0aec0;
 }
 
 body {

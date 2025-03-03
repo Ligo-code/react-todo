@@ -51,16 +51,17 @@ function AddTodoForm({ onAddTodo, users }) {
 
   return (
     <form onSubmit={handleAddTodo} className={styles.form}>
-      <div className={styles.inputContainer}>
-        <InputWithLabel
-          id="todoTitle"
-          value={todoTitle}
-          onInputChange={handleTitleChange}
-          type="text"
-          placeholder="Enter a title"
-          className={styles.input}
-          disabled={isLoading}
-        />
+      <InputWithLabel
+        id="todoTitle"
+        value={todoTitle}
+        onInputChange={handleTitleChange}
+        type="text"
+        placeholder="Enter a title"
+        className={styles.input}
+        disabled={isLoading}
+      />
+
+      <div className={styles.bottomRow}>
         <select
           value={assignedTo}
           onChange={handleAssignedToChange}
@@ -69,17 +70,22 @@ function AddTodoForm({ onAddTodo, users }) {
         >
           <option value="">Assign to...</option>
           {users
-            ?.filter((user) => user.fields.role === "child")
+            ?.filter((user) => user.fields?.role === "child")
             .map((user) => (
               <option key={user.id} value={user.id}>
-                {user.fields.username}
+                {user.fields?.username || "Unknown User"}
               </option>
             ))}
         </select>
-        <button type="submit" className={styles.addButton} disabled={isLoading}> {/* condition if loading color change */ } 
+        <button
+          type="submit"
+          className={`${styles.addButton} ${isLoading ? styles.loading : ""}`}
+          disabled={isLoading}
+        >
           {isLoading ? "Adding..." : "Add"}
         </button>
       </div>
+
       {error && <p className={styles.error}>{error}</p>}
     </form>
   );
