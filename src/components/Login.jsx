@@ -11,9 +11,11 @@ function Login({ setIsLoggedIn, setCurrentUser }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(""); // Очищаем ошибку перед запросом
 
     try {
       console.log("Attempting to log in with:", { username, password });
+
       const response = await fetch(
         `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Users?filterByFormula={username}='${username}'`,
         {
@@ -29,24 +31,32 @@ function Login({ setIsLoggedIn, setCurrentUser }) {
       }
 
       const data = await response.json();
-      console.log("User data:", data);
+      console.log("User data received:", data);
 
-      if (data.records.length === 1) {
-        const user = data.records[0];
-        const hashedPassword = user.fields.password;
+      if (!data.records || data.records.length === 0) {
+        setError("Invalid username or password.");
+        return;
+      }
 
-        // Сравниваем пароль с хешем
-        if (bcrypt.compareSync(password, hashedPassword)) {
-          setIsLoggedIn(true);
-          setCurrentUser({
-            id: user.id,
-            username: user.fields.username,
-            role: user.fields.role,
-          });
-          navigate("/app");
-        } else {
-          setError("Invalid username or password.");
-        }
+      const user = data.records[0];
+      if (!user.fields || !user.fields.password || !user.fields.username || !user.fields.role) {
+        setError("Invalid user data received.");
+        return;
+      }
+
+      const hashedPassword = user.fields.password;
+
+      if (bcrypt.compareSync(password, hashedPassword)) {
+        const currentUser = {
+          id: user.id,
+          username: user.fields.username,
+          role: user.fields.role,
+        };
+
+        console.log("User logged in:", currentUser);
+        setIsLoggedIn(true);
+        setCurrentUser(currentUser);
+        navigate("/app");
       } else {
         setError("Invalid username or password.");
       }
@@ -66,12 +76,14 @@ function Login({ setIsLoggedIn, setCurrentUser }) {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <button type="submit">Login</button>
       </form>

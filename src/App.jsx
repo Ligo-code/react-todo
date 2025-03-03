@@ -1,9 +1,4 @@
-import {  
-  Routes,
-  Route,
-  Navigate,  
-  Link,
-} from "react-router-dom";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { ThemeContext } from "./ThemeContext";
 import HomeScreen from "./components/HomeScreen";
@@ -16,15 +11,15 @@ import { FaHome, FaMoon, FaSun } from "react-icons/fa";
 function App() {
   const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null); // Состояние текущего пользователя  
+  const [currentUser, setCurrentUser] = useState(null); // Состояние текущего пользователя
   console.log("App rendered");
 
   return (
     <div className={`app ${isDarkTheme ? "dark-theme" : ""}`}>
       {/*Новый контейнер для кнопок */}
       <div className="header">
-      <Link to="/" className="nav-link">
-      <FaHome size={20} /> Home
+        <Link to="/" className="nav-link">
+          <FaHome size={20} /> Home
         </Link>
         <button
           className="theme-toggle"

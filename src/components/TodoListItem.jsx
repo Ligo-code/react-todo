@@ -71,33 +71,35 @@ console.log(`Assigned to: ${assignedChildren}`);
           </button>
         </div>
       ) : (
-        <div className={styles.TaskContainer}>
-          <input
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => onToggleCompleted(todo.id)}
-            className={styles.Checkbox}
-          />
-          <span className={`${styles.TaskTitle} ${todo.completed ? styles.completed : ""}`}>
-            {todo.title}
-          </span>
-          {/*Показываем родителю, кому назначена задача */}
-          {currentUser.role === "parent" && (
-            <span className={styles.AssignedTo}>
-              (Assigned to: {assignedChildren})
-            </span>
-          )}
-          {currentUser.role === "parent" && (
-            <div className={styles.ButtonContainer}>
-              <button onClick={handleEditClick} className={styles.EditButton}>
-              <FaEdit size={16} />
-              </button>
-              <button onClick={handleDeleteClick} className={styles.DeleteButton}>
-              <FaTrash size={16} />
-              </button>
-            </div>
-          )}
-        </div>
+<div className={styles.TaskContainer}>
+  <input
+    type="checkbox"
+    checked={todo.completed}
+    onChange={() => onToggleCompleted(todo.id)}
+    className={styles.Checkbox}
+  />
+  <div className={styles.TextWrapper}>
+    <span className={`${styles.TaskTitle} ${todo.completed ? styles.completed : ""}`}>
+      {todo.title}
+    </span>
+    {/* Показываем родителю, кому назначена задача */}
+    {currentUser.role === "parent" && (
+      <span className={styles.AssignedTo}>
+        (Assigned to: {assignedChildren})
+      </span>
+    )}
+  </div>
+  {currentUser.role === "parent" && (
+    <div className={styles.ButtonContainer}>
+      <button onClick={handleEditClick} className={styles.EditButton}>
+        <FaEdit size={16} />
+      </button>
+      <button onClick={handleDeleteClick} className={styles.DeleteButton}>
+        <FaTrash size={16} />
+      </button>
+    </div>
+  )}
+</div>
       )}
     </li>
   );

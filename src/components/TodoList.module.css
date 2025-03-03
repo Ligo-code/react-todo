@@ -1,5 +1,10 @@
-.todo-card {
+.todoList {
+  
   background-color: var(--task-bg);
+  max-width: 400px;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
   color: var(--task-text);
   border: 1px solid var(--task-border);
   border-radius: 8px;
@@ -8,6 +13,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
+
 
 .todo-card:hover {
   background-color: var(--task-hover-bg);
@@ -32,15 +38,18 @@
 
 .pagination button {
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #3c86d5;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.pagination button:hover {
+  background-color: #0056b3;
 }
 
+.pagination button:disabled {
+  background-color: #bcc4cc;
+  cursor: not-allowed;
+}
