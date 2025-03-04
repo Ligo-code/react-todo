@@ -216,44 +216,42 @@ function TodoApp({ currentUser }) {
       return 0;
     });
 
-  return (
-    <div className={styles.todoApp}>
-      <div className="sort-buttons">
-        <button
-          onClick={() => setSortType("title")}
-          className={sortType === "title" ? "active" : ""}
-        >
-          Sort by Title
-        </button>
-        <button
-          onClick={() => setSortType("createdTime")}
-          className={sortType === "createdTime" ? "active" : ""}
-        >
-          Sort by Created Time
-        </button>
-        <button
-          onClick={() => setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))}
-        >
-          {sortOrder === "asc" ? "Descending" : "Ascending"}
-        </button>
-      </div>
-      {currentUser.role === "parent" && (
-        <>
+    return (
+      <div className={styles.parentPage}>
+        <div className={styles.todoApp}>
+          {/* Заголовок остается, чтобы видно было "Your Created Tasks" */}
           <h2>Your Created Tasks</h2>
+    
+          {/* Форма добавления задач */}
           <AddTodoForm onAddTodo={addTodo} users={users} />
-        </>
-      )}
-      <TodoList
-        todos={sortedTasks(currentUser.role === "parent" ? parentTasks : childTasks)}
-        onRemoveTodo={removeTodo}
-        onEditTodo={editTodo}
-        onToggleCompleted={toggleCompleted}
-        currentUser={currentUser}
-        users={users || []}
-      />
-      {isLoading ? <p>Loading...</p> : error ? <p className="error">{error}</p> : null}
-    </div>
-  );
-}
+    
+          {/* Кнопки сортировки */}
+          <div className={styles.sortContainer}>
+            <button onClick={() => setSortType("title")} className={sortType === "title" ? styles.active : ""}>
+              Sort by Title
+            </button>
+            <button onClick={() => setSortType("createdTime")} className={sortType === "createdTime" ? styles.active : ""}>
+              Sort by Created Time
+            </button>
+            <button onClick={() => setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))}>
+              {sortOrder === "asc" ? "Descending" : "Ascending"}
+            </button>
+          </div>
+    
+          {/* Список задач с редактированием и удалением */}
+          <TodoList
+            todos={sortedTasks(todoList)}
+            onRemoveTodo={removeTodo}
+            onEditTodo={editTodo}
+            onToggleCompleted={toggleCompleted}
+            currentUser={currentUser}
+            users={users || []}
+          />
+        </div>
+      </div>
+    );
+    
+  };    
 
-export default TodoApp;
+  export default TodoApp;
+    
