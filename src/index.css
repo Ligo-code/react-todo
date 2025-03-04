@@ -103,14 +103,18 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  background-color: var(--button-bg);
+  background-color: #3c86d5;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--button-hover-bg);
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #0056b3;
 }
 
 input {

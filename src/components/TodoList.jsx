@@ -18,7 +18,7 @@ function TodoList({
   }
 
   const [currentPage, setCurrentPage] = useState(1);
-  const tasksPerPage = 4; // Количество задач на странице
+  const tasksPerPage = 5; // Количество задач на странице
   const totalPages = Math.ceil(todos.length / tasksPerPage);
 
   const indexOfLastTask = currentPage * tasksPerPage;

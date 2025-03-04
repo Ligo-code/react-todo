@@ -1,20 +1,56 @@
+.parentPage {
+  height: 100vh; /* Высота страницы - вся видимая область */
+  overflow-y: auto; /* Вертикальная прокрутка, если контент выходит за границы */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px; /* Чтобы заголовок не прилипал к верху */
+}
 
+.childPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Центрирование по вертикали */
+  height: 100vh; /* Высота на всю страницу */
+  padding: 20px; /* Чтобы контент не прилипал к краям */
+}
+
+
+.sortContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Кнопки сортировки */
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap; /* Добавляем перенос элементов */
+}
 
 .sort-buttons button {
-  padding: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 130px;
   background-color: #3c86d5;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex: 1 1 auto; /* Делаем кнопки гибкими */
 }
 
 .sort-buttons button:hover {
-  background-color: var(--button-hover-bg);
+  background-color: #0056b3;
 }
 
 .sort-buttons button.active {
-  background-color: var(--button-hover-bg);
+  background-color: #0056b3;
   font-weight: bold;
 }
