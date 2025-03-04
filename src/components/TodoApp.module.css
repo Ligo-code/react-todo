@@ -1,6 +1,5 @@
 .parentPage {
-  height: 100vh; /* Высота страницы - вся видимая область */
-  overflow-y: auto; /* Вертикальная прокрутка, если контент выходит за границы */
+  height: 100vh; /* Высота страницы - вся видимая область */  
   display: flex;
   flex-direction: column;
   align-items: center;
