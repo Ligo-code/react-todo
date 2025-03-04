@@ -32,7 +32,7 @@ function HomeScreen() {
         </div>
 
         <p className={styles.note}>
-          "Finally, a fair way to divide household work!" 
+          "Finally, a fair way to share household chores!" 
           <br />
           — Our Happy Families
         </p>
