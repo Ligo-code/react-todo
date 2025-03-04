@@ -1,141 +1,97 @@
+/* Контейнер - фон, позиционирование */
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
-  background: #cdebfb;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  background: transparent;
+  color: #0056b3;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Основной контент по центру */
 .content {
   text-align: center;
-  max-width: 600px;
+  padding: 2rem;
+  max-width: 500px;
   width: 100%;
 }
 
+/* Заголовок */
 .title {
-  font-size: 2.5rem;
-  color: #1a365d;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
-  line-height: 1.2;
 }
 
-.subtitle {
-  font-size: 1.8rem;
-  color: #4299e1;
-  margin: 0.5rem 0 1.5rem;
-  font-weight: 500;
-}
-
-.description {
+/* Подзаголовок */
+.tagline {
+  font-size: 1.4rem;
+  font-weight: 300;
+  opacity: 0.9;
   margin-bottom: 2rem;
 }
 
-.description p {
-  font-size: 1.2rem;
-  color: #4a5568;
-  line-height: 1.6;
-  margin: 0.5rem 0;
-}
-
-.perfectFor {
-  font-weight: 600;
-  margin-top: 1.5rem !important;
-  color: #2d3748 !important;
-}
-
+/* Контейнер для кнопок */
 .buttonGroup {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
-.primaryButton,
-.secondaryButton {
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
-}
-
+/* Кнопка "Get Started" */
 .primaryButton {
-  background: #4299e1;
-  color: white;
-  border: 2px solid #4299e1;
-}
-
-.secondaryButton {
-  background: transparent;
-  color: #4299e1;
-  border: 2px solid #4299e1;
+  background: white;
+  color: #3b82f6;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .primaryButton:hover {
-  background: #3182ce;
-  transform: translateY(-1px);
+  background: #f8f9fa;
+  transform: scale(1.05);
+}
+
+/* Кнопка "Sign In" */
+.secondaryButton {
+  background: #3b82f6;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: 2px solid white;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .secondaryButton:hover {
-  background: #ebf8ff;
+  background: #3b82f6;
+  transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
+/* Мобильная адаптация */
+@media (max-width: 600px) {
   .title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
-  
-  .description {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+
+  .tagline {
+    font-size: 1.2rem;
   }
-  
-  .primaryButton,
-  .secondaryButton {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    width: 100%;
-  }
-  
+
   .buttonGroup {
+    flex-direction: column;
     gap: 1rem;
   }
-}
 
-.benefits {
-  text-align: left;
-  max-width: 400px;
-  margin: 0 auto 2.5rem;
-  padding: 0;
-  list-style: none;
-  font-size: 1.1rem;
-  color: #2d3748;
-}
-
-.benefits li {
-  margin-bottom: 1rem;
-  padding-left: 2rem;
-  position: relative;
-  line-height: 1.5;
-}
-
-.benefits li::before {
-  content: "•";
-  color: #4299e1;
-  font-weight: bold;
-  font-size: 1.4rem;
-  position: absolute;
-  left: 0;
-  top: -2px;
-}
-
-.note {
-  margin-top: 2rem;
-  font-style: italic;
-  color: #718096;
-  font-size: 0.95rem;
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+  }
 }

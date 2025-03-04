@@ -16,7 +16,7 @@
   padding: 20px; /* Чтобы контент не прилипал к краям */
 }
 
-
+/* Кнопки сортировки */
 .sortContainer {
   display: flex;
   justify-content: center;

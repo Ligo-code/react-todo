@@ -6,36 +6,19 @@ function HomeScreen() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>
-          ChoreMaster
-          <div className={styles.subtitle}>Your Family's Task Hub</div>
-        </h1>
-        
-        <div className={styles.description}>
-          <p>Transform household responsibilities into a team effort</p>
-          <p className={styles.perfectFor}>Perfect for:</p>
-        </div>
+        {/* Заголовок */}
+        <h1 className={styles.title}>ChoreMaster</h1>
+        <p className={styles.tagline}>Make Chores Fun & Organized</p>
 
-        <ul className={styles.benefits}>
-          <li>✅ Parents managing kids' chores</li>
-          <li>✅ Teaching responsibility through tasks</li>
-          <li>✅ Tracking progress in real-time</li>
-        </ul>
-
+        {/* Кнопки */}
         <div className={styles.buttonGroup}>
           <Link to="/register" className={styles.primaryButton}>
-            Start Organizing Today
+            Get Started
           </Link>
           <Link to="/login" className={styles.secondaryButton}>
-            Returning User? Sign In
+            Sign In
           </Link>
         </div>
-
-        <p className={styles.note}>
-          "Finally, a fair way to share household chores!" 
-          <br />
-          — Our Happy Families
-        </p>
       </div>
     </div>
   );
