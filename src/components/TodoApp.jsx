@@ -240,7 +240,7 @@ function TodoApp({ currentUser }) {
     
           {/* Список задач с редактированием и удалением */}
           <TodoList
-            todos={sortedTasks(todoList)}
+            todos={sortedTasks(currentUser.role === "parent" ? parentTasks : childTasks)} 
             onRemoveTodo={removeTodo}
             onEditTodo={editTodo}
             onToggleCompleted={toggleCompleted}
