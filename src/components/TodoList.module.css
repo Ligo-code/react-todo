@@ -53,3 +53,15 @@
   background-color: #bcc4cc;
   cursor: not-allowed;
 }
+
+@media (max-width: 600px) {
+  .todoList {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 5px;
+  }
+}

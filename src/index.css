@@ -1,6 +1,6 @@
 :root {
   /* Светлая тема */
-  --background-color: #cdebfb;
+  --background-color: #d9f0fc;
   --text-color: black;
   --input-bg: #ffffff;
   --input-text: #333;
@@ -39,7 +39,7 @@
   --task-text: #e0e0e0;
   --task-border: #444;
   --task-hover-bg: #33334d;
-  --theme-toggle-bg: #1a1a40;  
+  --theme-toggle-bg: #1a1a40;
   --background-color-light: #292948;
   --background-color-dark: #0d2741;
   --primary-color: #4f93bb;
@@ -55,6 +55,16 @@
   --text-secondary: #a0aec0;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden; /* Блокирует горизонтальный скролл */
+}
+
 body {
   margin: 0;
   display: flex;
@@ -65,18 +75,17 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   background-color: var(--background-color);
-  background-image: url('/pattern.svg'); /* Паттерн для светлой темы */
+  background-image: url("/pattern.svg"); /* Паттерн для светлой темы */
   background-size: 64px 64px; /* Размер паттерна */
   background-repeat: repeat; /* Повторение паттерна */
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: "Roboto", sans-serif;  
+  font-family: "Roboto", sans-serif;
 }
-
 
 .dark-theme body {
   background-color: var(--background-color);
-  background-image: url('/patternDark.svg'); /* Паттерн для темной темы */
+  background-image: url("/patternDark.svg"); /* Паттерн для темной темы */
   background-size: 64px 64px;
   background-repeat: repeat;
 }
@@ -124,7 +133,8 @@ input {
   border-radius: 4px;
   padding: 10px;
   font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 input:hover {

@@ -37,4 +37,14 @@
     background-color: #e0e0e0;
     cursor: not-allowed;
   }
+
+  @media (max-width: 600px) {
+    .inputContainer {
+      max-width: 100%;
+    }
+  
+    .inputField {
+      font-size: 14px;
+    }
+  }
   
