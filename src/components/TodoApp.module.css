@@ -53,3 +53,16 @@
   background-color: #0056b3;
   font-weight: bold;
 }
+
+/* Медиа-запросы для мобильных */
+@media (max-width: 600px) {
+  .sortContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .todoApp {
+    width: 100%;
+    padding: 10px;
+  }
+}
